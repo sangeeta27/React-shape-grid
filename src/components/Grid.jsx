@@ -1,11 +1,14 @@
-import React, { useState, useRef, useLayoutEffect } from 'react';
-import { Stage, Layer, Line, Transformer } from 'react-konva';
+import React, { useState, useRef, useLayoutEffect, useEffect, lazy, Suspense} from 'react';
+import { Stage, Layer, Line, Transformer, Text } from 'react-konva';
 import Square from './Square';
 import Triangle from './Triangle';
 import Circle from './Circle';
 import Trapezoid from './Trapezoid';
 import LinePath from './Line';
 import Toolbar from './Toolbar';
+
+
+const LazyGridLines = lazy(() => import('./GridLines'));
 
 const ShapeComponent = ({ shape, isSelected, onSelect, onChange }) => {
   const shapeRef = useRef(null);
@@ -101,10 +104,14 @@ const Grid = () => {
   const gridSize = 100;
   const shapeSize = 50;
 
+  
   useLayoutEffect(() => {
     const stage = stageRef.current;
-    const gridLayer = gridLayerRef.current;
+    const gridLayer = gridLayerRef.current; 
+
+    console.log('before check');
     if (stage && gridLayer) {
+      console.log('check');
       gridLayer.draw(); // Redraw the grid lines layer after the initial render
     }
   }, []);
@@ -152,27 +159,6 @@ const Grid = () => {
     setShapes(updatedShapes);
   };
 
-  const renderGridLines = () => {
-    const stage = stageRef.current;
-    if (!stage) return null;
-    const { width, height } = stage.getSize();
-    const lines = [];
-
-    for (let i = 0; i < width; i += gridSize) {
-      lines.push(
-        <Line key={`vertical-${i}`} points={[i, 0, i, height]} stroke="lightgray" strokeWidth={1} />
-      );
-    }
-
-    for (let j = 0; j < height; j += gridSize) {
-      lines.push(
-        <Line key={`horizontal-${j}`} points={[0, j, width, j]} stroke="lightgray" strokeWidth={1} />
-      );
-    }
-
-    return lines;
-  };
-
   return (
     <div>
       <Toolbar onShapeSelect={handleShapeSelect} />
@@ -183,7 +169,11 @@ const Grid = () => {
         onClick={handleStageClick}
         onTap={handleStageClick}
       >
-        <Layer ref={gridLayerRef}>{renderGridLines()}</Layer>
+        <Layer ref={gridLayerRef}>
+          <Suspense fallback={<Text text="Loading grid lines..." />}>
+            <LazyGridLines stageRef={stageRef} gridSize={gridSize} />
+          </Suspense>
+        </Layer>
         <Layer>
           {shapes.map((shape, index) => (
             <ShapeComponent
