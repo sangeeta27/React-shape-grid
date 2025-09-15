@@ -1,23 +1,83 @@
-SHAPE GRID APP
+# 🟦 Shape Grid App
 
-(Click on any button to create the shape and drag it.)
+**Interactive Canvas-Based Geometry Playground**  
+(Click on any shape button to create, then drag/resize/rotate it on the grid.)
 
-Geometric Shapes Interaction Web Application
+---
 
-Built using React, this project showcases state and props management along with lazy loading. Leveraging React Konva, a JavaScript library that seamlessly integrates React with the Konva Framework, it offers a declarative and reactive approach to drawing complex canvas graphics. Responsive and engaging, this application provides a versatile space for exploring geometric concepts and unleashing creativity.
+## 📌 Project Overview
 
-Project Objective:
-The primary goal is to develop a web-based application prototype offering users a creative playground to interact with basic geometric shapes. Users can seamlessly place, select, and modify shapes such as squares, triangles, circles, trapezoids, and lines on a simple grid in the X, Y plane.
+An interactive web application built using **React** and **React Konva** that allows users to place, drag, resize, and rotate geometric shapes on a dynamic 2D grid. The app provides an intuitive canvas for experimenting with basic geometry and user-driven shape manipulation.
 
-Implemented Features:
+---
 
-Simple Grid: Implemented a 2D grid in the X, Y plane. The grid lines dynamically adjust in density based on the zoom level, ensuring clarity and avoiding clutter.
-Shape Placement: Users can effortlessly place various shapes onto the grid, including squares, triangles, circles, trapezoids, and lines.
-Shape Interaction:
-Positioning: Enables users to freely move selected shape(s) across the grid.
-Selection and Multi-selection: Users have the flexibility to select a single shape or multiple shapes simultaneously, with visual indicators like highlighting or bounding boxes.
-Scaling: Allows users to resize selected shape(s) while maintaining proportions, enhancing customization options.
-Rotation: Users can rotate selected shapes around their center point, facilitating versatile manipulation.
+## 🎯 Objective
 
-Responsive Design:
-The application is designed to be responsive, ensuring a seamless experience across various devices and screen sizes.
+To build a **web-based prototype** that offers users a creative, interactive canvas for:
+- Creating geometric shapes (square, triangle, circle, trapezoid, line)
+- Placing them accurately on a 2D grid (X, Y plane)
+- Interacting with shapes through dragging, resizing, rotating, and multi-selection
+
+---
+
+## ✅ Implemented Features
+
+- **Dynamic 2D Grid**
+  - Auto-scaling grid lines depending on zoom level
+  - Clear separation of cells for accurate placement
+
+- **Shape Placement**
+  - Add shapes by selecting from toolbar and clicking on the grid
+  - Supports: Square, Circle, Triangle, Trapezoid, Line
+
+- **Shape Interaction**
+  - 🟦 **Move**: Drag shapes freely across the grid  
+  - 🔲 **Resize**: Scale shapes using transformer handles  
+  - 🔁 **Rotate**: Rotate shapes around their center  
+  - 🔘 **Select / Multi-select**: Highlight or manipulate one or multiple shapes simultaneously
+
+- **Responsive UI**
+  - Fully adaptable to different screen sizes and resolutions
+
+- **Lazy Loading**
+  - Grid lines are lazy-loaded for better performance using `React.lazy` and `Suspense`
+
+---
+
+## ⚙️ React Libraries Used
+
+| Library | Purpose |
+|--------|---------|
+| `react` | Core UI framework |
+| `react-konva` | Canvas rendering with React |
+| `konva` | Underlying 2D canvas drawing engine |
+| `react-dom` | Rendering React components |
+| `react-scripts` | App build and dev tooling |
+| `@babel/plugin-syntax-dynamic-import` | Lazy loading support for components |
+
+### Components & Features
+- `Stage`, `Layer`, `Transformer` — from **React Konva**  
+- `Suspense`, `lazy` — for code splitting and lazy loading  
+- `useRef`, `useEffect`, `useLayoutEffect` — React hooks for lifecycle and DOM control  
+
+---
+
+## 🧩 Tech Stack
+
+- **Frontend**: React, React Konva, JavaScript (ES6+)
+- **Canvas Engine**: Konva.js
+- **Styling**: CSS (Responsive)
+
+---
+
+## 🚀 Future Enhancements (Ideas)
+
+- Shape grouping and alignment tools
+- Undo/redo functionality
+- Export canvas as image or SVG
+- Save/load projects from local storage
+- Snap-to-grid and measurement tools
+
+---
+
+![Demo](./assets/demo.gif)
